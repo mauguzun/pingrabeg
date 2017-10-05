@@ -123,7 +123,7 @@ namespace GrabPinterest
             try
             {
                  List<string> result = new List<string>();
-                 var  nodes = _driver.FindElementsByCssSelector(".fadeContainer img");
+                 var  nodes = _driver.FindElementsByCssSelector(".pinLink  img");
                  foreach (var node in nodes)
                  {
                         string img = node.GetAttribute("src");
