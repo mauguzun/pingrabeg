@@ -11,19 +11,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-
+using OpenQA.Selenium;
+using System.Diagnostics;
+using OpenQA.Selenium.Support.UI;
 
 namespace GrabPinterest
 {
     public partial class Pinterest : Form
     {
-
         private bool grabStarter = false;
 
         private List<Domain> _domains;
         
 
         private string _url = "https://www.pinterest.com/categories/popular/";
+        private string _login = "http://pinterest.com/login";
+
         private string _domainFile = "domains.txt";
         private string _resultFile = "result.txt";
 
@@ -89,20 +92,45 @@ namespace GrabPinterest
             {
                 grabStarter = true;
             }
-
+            AppendTextBox("pressed  start" + Environment.NewLine);
+            _jsDrivers = new Dictionary<int, PhantomJSDriver>();
 
             Task.Factory.StartNew(() => {
 
                     var driver = new PhantomJSDriver(_GetJsSettings());
-                     _jsDrivers.Add(0, driver);
+
+              
+
+                    driver.Url = _login;
+                    driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 1, 0);
+                    driver.FindElementByName("id").SendKeys("yy_26@brauksimkopa.lv");
+                    driver.FindElementByName("password").SendKeys("11trance");
+                    driver.FindElementByCssSelector("form button").Click();
+
+               
+
+                try
+                {
+                    WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
+                    wait.Until((d) => d.Url != _login);
+                    _jsDrivers.Add(0, driver);
                     while (true)
                     {
-                         AppendTextBox("<-- " + Environment.NewLine);
-                         this.AppendFiles(_jsDrivers[0]);
-                         AppendTextBox("-->" + Environment.NewLine);
-                         Thread.Sleep(4000);
+                        AppendTextBox("<-- " + Environment.NewLine);
+                        this.AppendFiles(_jsDrivers[0]);
+                        AppendTextBox("-->" + Environment.NewLine);
+                        Thread.Sleep(4000);
                     }
 
+
+                }
+                catch(Exception ex)
+                {
+                    AppendTextBox(ex.Message);
+                    driver.GetScreenshot().SaveAsFile("ss.png", ScreenshotImageFormat.Png);
+                }
+               
+                   
             });
 
             Task.Factory.StartNew(() => {
@@ -254,6 +282,26 @@ namespace GrabPinterest
                 }
                 
             }
+        }
+
+       
+
+        private void killToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var proccess = Process.GetProcesses();
+            foreach (Process pr in proccess)
+            {
+
+                var x = pr.ProcessName;
+                if (pr.ProcessName.ToLower().Contains("phantom"))
+                {
+                    console.Text += $"kill {pr.Id}{Environment.NewLine}";
+                    pr.Kill();
+                }
+
+
+            }
+            console.Text += " killing done ";
         }
     }
 }
