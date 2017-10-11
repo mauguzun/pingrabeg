@@ -22,7 +22,8 @@ namespace GrabPinterest
         private bool grabStarter = false;
 
         private List<Domain> _domains;
-        
+        public string Email { get; set; } = null;
+        public string Pass { get; set; } = null;
 
         private string _url = "https://www.pinterest.com/categories/popular/";
         private string _login = "http://pinterest.com/login";
@@ -92,9 +93,15 @@ namespace GrabPinterest
             {
                 grabStarter = true;
             }
-            AppendTextBox("pressed  start" + Environment.NewLine);
-            _jsDrivers = new Dictionary<int, PhantomJSDriver>();
 
+
+            if (this.Email == null)
+            {
+                MessageBox.Show("please load Email");
+                return;
+            }
+            AppendTextBox("pressed  start" + Environment.NewLine);
+           
             Task.Factory.StartNew(() => {
 
                     var driver = new PhantomJSDriver(_GetJsSettings());
@@ -103,21 +110,20 @@ namespace GrabPinterest
 
                     driver.Url = _login;
                     driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 1, 0);
-                    driver.FindElementByName("id").SendKeys("yy_26@brauksimkopa.lv");
-                    driver.FindElementByName("password").SendKeys("11trance");
+                    driver.FindElementByName("id").SendKeys(Email);
+                    driver.FindElementByName("password").SendKeys(Pass);
                     driver.FindElementByCssSelector("form button").Click();
 
-               
+                   
 
                 try
                 {
-                    WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
+                    WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
                     wait.Until((d) => d.Url != _login);
-                    _jsDrivers.Add(0, driver);
-                    while (true)
+                     while (true)
                     {
                         AppendTextBox("<-- " + Environment.NewLine);
-                        this.AppendFiles(_jsDrivers[0]);
+                        this.AppendFiles(driver);
                         AppendTextBox("-->" + Environment.NewLine);
                         Thread.Sleep(4000);
                     }
@@ -134,10 +140,10 @@ namespace GrabPinterest
             });
 
             Task.Factory.StartNew(() => {
-                _jsDrivers.Add(1, new PhantomJSDriver(_GetJsSettings()));
+                var driver = new PhantomJSDriver(_GetJsSettings());
                 while (true)
                 {
-                    this.PostResult(_jsDrivers[1]);
+                    this.PostResult(driver);
                 }
 
             });
@@ -268,20 +274,15 @@ namespace GrabPinterest
 
         private void Pinterest_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach(PhantomJSDriver js  in this._jsDrivers.Values )
-            {
-                try
-                {
-                    js.Dispose();
-                    js.Close();
-                    
-                }
-                catch
-                {
-                   
-                }
+            var proccess = Process.GetProcesses();
+
+
+            foreach (Process pr in proccess)
+                if (pr.ProcessName.ToLower().Contains("phantom"))
+                    pr.Kill();
                 
-            }
+
+
         }
 
        
@@ -295,13 +296,31 @@ namespace GrabPinterest
                 var x = pr.ProcessName;
                 if (pr.ProcessName.ToLower().Contains("phantom"))
                 {
-                    console.Text += $"kill {pr.Id}{Environment.NewLine}";
+                    AppendTextBox( $"kill {pr.Id}");
                     pr.Kill();
                 }
 
 
             }
-            console.Text += " killing done ";
+            AppendTextBox( " killing done ");
+        }
+
+        
+
+        private void setUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] userPass = console.Text.Split(':');
+                this.Email = userPass[0];
+                this.Pass = userPass[1];
+                AppendTextBox(" email password done");
+            }
+            catch
+            {
+
+            }
+
         }
     }
 }

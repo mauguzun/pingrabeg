@@ -36,6 +36,7 @@
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.killToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mynotifyicon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.setUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +58,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem,
             this.startToolStripMenuItem,
-            this.killToolStripMenuItem});
+            this.killToolStripMenuItem,
+            this.setUserToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(375, 24);
@@ -94,6 +96,13 @@
             this.mynotifyicon.Visible = true;
             this.mynotifyicon.Click += new System.EventHandler(this.mynotifyicon_Click);
             // 
+            // setUserToolStripMenuItem
+            // 
+            this.setUserToolStripMenuItem.Name = "setUserToolStripMenuItem";
+            this.setUserToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.setUserToolStripMenuItem.Text = "SetUser";
+            this.setUserToolStripMenuItem.Click += new System.EventHandler(this.setUserToolStripMenuItem_Click);
+            // 
             // Pinterest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,6 +131,7 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon mynotifyicon;
         private System.Windows.Forms.ToolStripMenuItem killToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setUserToolStripMenuItem;
     }
 }
 
