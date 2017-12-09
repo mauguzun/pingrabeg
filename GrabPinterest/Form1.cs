@@ -105,11 +105,10 @@ namespace GrabPinterest
             Task.Factory.StartNew(() => {
 
                     var driver = new PhantomJSDriver(_GetJsSettings());
-
-              
+                   driver.Manage().Window.Size = new Size(1920, 1080);
 
                     driver.Url = _login;
-                    driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 1, 0);
+                    driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 0, 30);
                     driver.FindElementByName("id").SendKeys(Email);
                     driver.FindElementByName("password").SendKeys(Pass);
                     driver.FindElementByCssSelector("form button").Click();
@@ -118,13 +117,14 @@ namespace GrabPinterest
 
                 try
                 {
-                    WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
-                    wait.Until((d) => d.Url != _login);
-                     while (true)
+                    WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+                    wait.Until((d) => d.FindElements(By.Name("id")).Count() == 0);
+                    driver.GetScreenshot().SaveAsFile("try.png", ScreenshotImageFormat.Png);
+                    while (true)
                     {
-                        AppendTextBox("<-- " + Environment.NewLine);
+                        AppendTextBox("<----- " + Environment.NewLine);
                         this.AppendFiles(driver);
-                        AppendTextBox("-->" + Environment.NewLine);
+                        AppendTextBox("------>" + Environment.NewLine);
                         Thread.Sleep(4000);
                     }
 
@@ -132,8 +132,9 @@ namespace GrabPinterest
                 }
                 catch(Exception ex)
                 {
+                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     AppendTextBox(ex.Message);
-                    driver.GetScreenshot().SaveAsFile("ss.png", ScreenshotImageFormat.Png);
+                    driver.GetScreenshot().SaveAsFile("catch.png", ScreenshotImageFormat.Png);
                 }
                
                    
@@ -141,6 +142,7 @@ namespace GrabPinterest
 
             Task.Factory.StartNew(() => {
                 var driver = new PhantomJSDriver(_GetJsSettings());
+                driver.Manage().Window.Size = new Size(1920, 1080);
                 while (true)
                 {
                     this.PostResult(driver);
@@ -153,10 +155,11 @@ namespace GrabPinterest
 
         private  void AppendFiles(PhantomJSDriver _driver)
         {
-           
+            List<string> result = new List<string>();
             try
             {
-                 List<string> result = new List<string>();
+              
+                
                  var  nodes = _driver.FindElementsByCssSelector(".pinLink  img");
                  foreach (var node in nodes)
                  {
@@ -170,10 +173,10 @@ namespace GrabPinterest
                         else
                             AppendTextBox($" node  already exist" + Environment.NewLine);
 
+                        
 
                 }
-                File.AppendAllLines(this._resultFile, result); 
-                AppendTextBox ( $"saved {result.Count()}" + Environment.NewLine);
+           
             }
             catch(Exception ex)
             {
@@ -181,6 +184,8 @@ namespace GrabPinterest
             }
             finally
             {
+                File.AppendAllLines(this._resultFile, result);
+                AppendTextBox($"saved {result.Count()}" + Environment.NewLine);
                 _driver.Url = this._url;
               
             }
