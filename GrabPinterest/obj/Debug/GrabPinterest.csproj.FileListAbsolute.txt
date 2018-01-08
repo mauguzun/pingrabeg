@@ -42,3 +42,4 @@ C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\bin\Debug\WebDriver.Support.dll
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\bin\Debug\WebDriver.Support.xml
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\obj\Debug\GrabPinterest.csprojResolveAssemblyReference.cache
+C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\obj\Debug\GrabPinterest.csproj.CoreCompileInputs.cache

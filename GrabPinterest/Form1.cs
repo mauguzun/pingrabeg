@@ -95,11 +95,11 @@ namespace GrabPinterest
             }
 
 
-            if (this.Email == null)
-            {
-                MessageBox.Show("please load Email");
-                return;
-            }
+            //if (this.Email == null)
+            //{
+            //    MessageBox.Show("please load Email");
+            //    return;
+            //}
             AppendTextBox("pressed  start" + Environment.NewLine);
            
             Task.Factory.StartNew(() => {
@@ -107,19 +107,19 @@ namespace GrabPinterest
                     var driver = new PhantomJSDriver(_GetJsSettings());
                    driver.Manage().Window.Size = new Size(1920, 1080);
 
-                    driver.Url = _login;
-                    driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 0, 30);
-                    driver.FindElementByName("id").SendKeys(Email);
-                    driver.FindElementByName("password").SendKeys(Pass);
-                    driver.FindElementByCssSelector("form button").Click();
+                    //driver.Url = _login;
+                    //driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 0, 30);
+                    //driver.FindElementByName("id").SendKeys(Email);
+                    //driver.FindElementByName("password").SendKeys(Pass);
+                    //driver.FindElementByCssSelector("form button").Click();
 
                    
 
                 try
                 {
-                    WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
-                    wait.Until((d) => d.FindElements(By.Name("id")).Count() == 0);
-                    driver.GetScreenshot().SaveAsFile("try.png", ScreenshotImageFormat.Png);
+                    //WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+                    //wait.Until((d) => d.FindElements(By.Name("id")).Count() == 0);
+                    //driver.GetScreenshot().SaveAsFile("try.png", ScreenshotImageFormat.Png);
                     while (true)
                     {
                         AppendTextBox("<----- " + Environment.NewLine);
@@ -133,8 +133,8 @@ namespace GrabPinterest
                 catch(Exception ex)
                 {
                     MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    AppendTextBox(ex.Message);
-                    driver.GetScreenshot().SaveAsFile("catch.png", ScreenshotImageFormat.Png);
+                    //AppendTextBox(ex.Message);
+                    //driver.GetScreenshot().SaveAsFile("catch.png", ScreenshotImageFormat.Png);
                 }
                
                    
