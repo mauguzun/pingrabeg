@@ -268,6 +268,18 @@
             are attempting to run the Chrome driver remotely, use <see cref="T:OpenQA.Selenium.Remote.RemoteWebDriver" />
             in conjunction with a standalone WebDriver server.</remarks>
         </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeDriver.NetworkConditions">
+            <summary>
+            Gets or sets the network condition emulation for Chrome.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.ExecuteChromeCommand(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Executes a custom Chrome command.
+            </summary>
+            <param name="commandName">Name of the command to execute.</param>
+            <param name="commandParameters">Parameters of the command to execute.</param>
+        </member>
         <member name="T:OpenQA.Selenium.Chrome.ChromeDriverService">
             <summary>
             Exposes the service provided by the native ChromeDriver executable.
@@ -394,6 +406,31 @@
             the browser when emulating a mobile device. Defaults to <see langword="true" />.
             </summary>
         </member>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeNetworkConditions">
+            <summary>
+            Provides manipulation of getting and setting network conditions from Chrome.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeNetworkConditions.IsOffline">
+            <summary>
+            Gets or sets a value indicating whether the network is offline. Defaults to <see langword="false" />.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeNetworkConditions.Latency">
+            <summary>
+            Gets or sets the simulated latency of the connection. Typically given in milliseconds.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeNetworkConditions.DownloadThroughput">
+            <summary>
+            Gets or sets the throughput of the network connection in kb/second for downloading.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeNetworkConditions.UploadThroughput">
+            <summary>
+            Gets or sets the throughput of the network connection in kb/second for uploading.
+            </summary>
+        </member>
         <member name="T:OpenQA.Selenium.Chrome.ChromeOptions">
             <summary>
             Class to manage options specific to <see cref="T:OpenQA.Selenium.Chrome.ChromeDriver" /></summary>
@@ -437,11 +474,6 @@
             ChromeDriver instance is exited. Defaults to <see langword="false" />.
             </summary>
         </member>
-        <member name="P:OpenQA.Selenium.Chrome.ChromeOptions.Proxy">
-            <summary>
-            Gets or sets the proxy to use with this instance of Chrome.
-            </summary>
-        </member>
         <member name="P:OpenQA.Selenium.Chrome.ChromeOptions.Arguments">
             <summary>
             Gets the list of arguments appended to the Chrome command line as a string array.
@@ -466,6 +498,13 @@
         <member name="P:OpenQA.Selenium.Chrome.ChromeOptions.PerformanceLoggingPreferences">
             <summary>
             Gets or sets the performance logging preferences for the driver.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeOptions.UseSpecCompliantProtocol">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:OpenQA.Selenium.Chrome.ChromeDriver" /> instance
+            should use the legacy OSS protocol dialect or a dialect compliant with the W3C
+            WebDriver Specification.
             </summary>
         </member>
         <member name="M:OpenQA.Selenium.Chrome.ChromeOptions.AddArgument(System.String)">
@@ -862,9 +901,107 @@
             <param name="keySequence">The sequence to test for file existence.</param>
             <returns>This method always returns <see langword="false" /> in this implementation.</returns>
         </member>
+        <member name="T:OpenQA.Selenium.UnhandledPromptBehavior">
+            <summary>
+            Specifies the behavior of handling unexpected alerts in the IE driver.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.UnhandledPromptBehavior.Default">
+            <summary>
+            Indicates the behavior is not set.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.UnhandledPromptBehavior.Ignore">
+            <summary>
+            Ignore unexpected alerts, such that the user must handle them.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.UnhandledPromptBehavior.Accept">
+            <summary>
+            Accept unexpected alerts.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.UnhandledPromptBehavior.Dismiss">
+            <summary>
+            Dismiss unexpected alerts.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.UnhandledPromptBehavior.AcceptAndNotify">
+            <summary>
+            Accepts unexpected alerts and notifies the user that the alert has
+            been accepted by throwing an <see cref="T:OpenQA.Selenium.UnhandledAlertException" /></summary>
+        </member>
+        <member name="F:OpenQA.Selenium.UnhandledPromptBehavior.DismissAndNotify">
+            <summary>
+            Dismisses unexpected alerts and notifies the user that the alert has
+            been dismissed by throwing an <see cref="T:OpenQA.Selenium.UnhandledAlertException" /></summary>
+        </member>
+        <member name="T:OpenQA.Selenium.PageLoadStrategy">
+            <summary>
+            Specifies the behavior of waiting for page loads in the driver.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.PageLoadStrategy.Default">
+            <summary>
+            Indicates the behavior is not set.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.PageLoadStrategy.Normal">
+            <summary>
+            Waits for pages to load and ready state to be 'complete'.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.PageLoadStrategy.Eager">
+            <summary>
+            Waits for pages to load and for ready state to be 'interactive' or 'complete'.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.PageLoadStrategy.None">
+            <summary>
+            Does not wait for pages to load, returning immediately.
+            </summary>
+        </member>
         <member name="T:OpenQA.Selenium.DriverOptions">
             <summary>
             Base class for managing options specific to a browser driver.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverOptions.BrowserName">
+            <summary>
+            Gets or sets the name of the browser.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverOptions.BrowserVersion">
+            <summary>
+            Gets or sets the version of the browser.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverOptions.PlatformName">
+            <summary>
+            Gets or sets the name of the platform on which the browser is running.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverOptions.AcceptInsecureCertificates">
+            <summary>
+            Gets or sets a value indicating whether the browser should accept self-signed
+            SSL certificates.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverOptions.UnhandledPromptBehavior">
+            <summary>
+            Gets or sets the value for describing how unexpected alerts are to be handled in the browser.
+            Defaults to <see cref="F:OpenQA.Selenium.UnhandledPromptBehavior.Default" />.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverOptions.PageLoadStrategy">
+            <summary>
+            Gets or sets the value for describing how the browser is to wait for pages to load in the browser.
+            Defaults to <see cref="F:OpenQA.Selenium.PageLoadStrategy.Default" />.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverOptions.Proxy">
+            <summary>
+            Gets or sets the <see cref="P:OpenQA.Selenium.DriverOptions.Proxy" /> to be used with this browser.
             </summary>
         </member>
         <member name="M:OpenQA.Selenium.DriverOptions.AddAdditionalCapability(System.String,System.Object)">
@@ -899,6 +1036,14 @@
             Known log types can be found in the <see cref="T:OpenQA.Selenium.LogType" /> class.</param>
             <param name="logLevel">The <see cref="T:OpenQA.Selenium.LogLevel" /> value to which to set the log level.</param>
         </member>
+        <member name="M:OpenQA.Selenium.DriverOptions.AddKnownCapabilityName(System.String,System.String)">
+            <summary>
+            Adds a known capability to the list of known capabilities and associates it
+            with the type-safe property name of the options class to be used instead.
+            </summary>
+            <param name="capabilityName">The name of the capability.</param>
+            <param name="typeSafeOptionName">The name of the option property or method to be used instead.</param>
+        </member>
         <member name="M:OpenQA.Selenium.DriverOptions.GenerateLoggingPreferencesDictionary">
             <summary>
             Generates the logging preferences dictionary for transmission as a desired capability.
@@ -929,6 +1074,16 @@
             <summary>
             Gets the Uri of the service.
             </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.DriverService.HostName">
+            <summary>
+            Gets or sets the host name of the service. Defaults to "localhost."
+            </summary>
+            <remarks>
+            Most driver service executables do not allow connections from remote
+            (non-local) machines. This property can be used as a workaround so
+            that an IP address (like "127.0.0.1" or "::1") can be used instead.
+            </remarks>
         </member>
         <member name="P:OpenQA.Selenium.DriverService.Port">
             <summary>
@@ -1237,12 +1392,6 @@
             </code>
             </example>
         </member>
-        <member name="P:OpenQA.Selenium.Edge.EdgeOptions.PageLoadStrategy">
-            <summary>
-            Gets or sets the value for describing how the browser is to wait for pages to load in the Edge driver.
-            Defaults to <see cref="F:OpenQA.Selenium.Edge.EdgePageLoadStrategy.Default" />.
-            </summary>
-        </member>
         <member name="M:OpenQA.Selenium.Edge.EdgeOptions.AddAdditionalCapability(System.String,System.Object)">
             <summary>
             Provides a means to add additional capabilities not yet added as type safe options
@@ -1276,6 +1425,114 @@
             </summary>
             <param name="parent">Driver in use</param>
             <param name="elementId">Id of the element</param>
+        </member>
+        <member name="T:OpenQA.Selenium.ElementClickInterceptedException">
+            <summary>
+            The exception that is thrown when an element is not visible.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message and a reference to the inner exception that is the
+            cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null" /> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementClickInterceptedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+            information about the source or destination.</param>
+        </member>
+        <member name="T:OpenQA.Selenium.ElementNotInteractableException">
+            <summary>
+            The exception that is thrown when an element is not visible.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message and a reference to the inner exception that is the
+            cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null" /> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotInteractableException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+            information about the source or destination.</param>
+        </member>
+        <member name="T:OpenQA.Selenium.ElementNotSelectableException">
+            <summary>
+            The exception that is thrown when an element is not visible.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with
+            a specified error message and a reference to the inner exception that is the
+            cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null" /> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.ElementNotSelectableException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.ElementNotInteractableException" /> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
+            information about the source or destination.</param>
         </member>
         <member name="T:OpenQA.Selenium.ElementNotVisibleException">
             <summary>
@@ -1520,6 +1777,30 @@
             </summary>
             <param name="service">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriverService" /> used to initialize the driver.</param>
         </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified path
+            to the directory containing geckodriver.exe.
+            </summary>
+            <param name="geckoDriverDirectory">The full path to the directory containing geckodriver.exe.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(System.String,OpenQA.Selenium.Firefox.FirefoxOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified path
+            to the directory containing geckodriver.exe and options.
+            </summary>
+            <param name="geckoDriverDirectory">The full path to the directory containing geckodriver.exe.</param>
+            <param name="options">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> to be used with the Firefox driver.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(System.String,OpenQA.Selenium.Firefox.FirefoxOptions,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified path
+            to the directory containing geckodriver.exe, options, and command timeout.
+            </summary>
+            <param name="geckoDriverDirectory">The full path to the directory containing geckodriver.exe.</param>
+            <param name="options">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> to be used with the Firefox driver.</param>
+            <param name="commandTimeout">The maximum amount of time to wait for each command.</param>
+        </member>
         <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(OpenQA.Selenium.Firefox.FirefoxDriverService,OpenQA.Selenium.Firefox.FirefoxOptions,System.TimeSpan)">
             <summary>
             Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver" /> class using the specified options, driver service, and timeout. Uses the Mozilla-provided Marionette driver implementation.
@@ -1717,6 +1998,12 @@
             instance of Firefox.
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxDriverService.OpenBrowserToolbox">
+            <summary>
+            Gets or sets a value indicating whether to open the Firefox Browser Toolbox
+            when Firefox is launched.
+            </summary>
+        </member>
         <member name="P:OpenQA.Selenium.Firefox.FirefoxDriverService.InitializationTimeout">
             <summary>
             Gets a value indicating the time to wait for an initial connection before timing out.
@@ -1828,12 +2115,13 @@
             Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> class.
             </summary>
         </member>
-        <member name="M:OpenQA.Selenium.Firefox.FirefoxOptions.#ctor(OpenQA.Selenium.Firefox.FirefoxProfile,OpenQA.Selenium.Firefox.FirefoxBinary)">
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxOptions.#ctor(OpenQA.Selenium.Firefox.FirefoxProfile,OpenQA.Selenium.Firefox.FirefoxBinary,OpenQA.Selenium.Remote.DesiredCapabilities)">
             <summary>
             Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxOptions" /> class for the given profile and binary.
             </summary>
             <param name="profile">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile" /> to use in the options.</param>
             <param name="binary">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary" /> to use in the options.</param>
+            <param name="capabilities">The <see cref="T:OpenQA.Selenium.Remote.DesiredCapabilities" /> to copy into the options.</param>
         </member>
         <member name="P:OpenQA.Selenium.Firefox.FirefoxOptions.UseLegacyImplementation">
             <summary>
@@ -1848,11 +2136,6 @@
         <member name="P:OpenQA.Selenium.Firefox.FirefoxOptions.BrowserExecutableLocation">
             <summary>
             Gets or sets the path and file name of the Firefox browser executable.
-            </summary>
-        </member>
-        <member name="P:OpenQA.Selenium.Firefox.FirefoxOptions.Proxy">
-            <summary>
-            Gets or sets the <see cref="P:OpenQA.Selenium.Firefox.FirefoxOptions.Proxy" /> to be used with Firefox.
             </summary>
         </member>
         <member name="P:OpenQA.Selenium.Firefox.FirefoxOptions.LogLevel">
@@ -3024,31 +3307,6 @@
             Dismiss unexpected alerts.
             </summary>
         </member>
-        <member name="T:OpenQA.Selenium.IE.InternetExplorerPageLoadStrategy">
-            <summary>
-            Specifies the behavior of waiting for page loads in the IE driver.
-            </summary>
-        </member>
-        <member name="F:OpenQA.Selenium.IE.InternetExplorerPageLoadStrategy.Default">
-            <summary>
-            Indicates the behavior is not set.
-            </summary>
-        </member>
-        <member name="F:OpenQA.Selenium.IE.InternetExplorerPageLoadStrategy.Normal">
-            <summary>
-            Waits for pages to load and ready state to be 'complete'.
-            </summary>
-        </member>
-        <member name="F:OpenQA.Selenium.IE.InternetExplorerPageLoadStrategy.Eager">
-            <summary>
-            Waits for pages to load and for ready state to be 'interactive' or 'complete'.
-            </summary>
-        </member>
-        <member name="F:OpenQA.Selenium.IE.InternetExplorerPageLoadStrategy.None">
-            <summary>
-            Does not wait for pages to load, returning immediately.
-            </summary>
-        </member>
         <member name="T:OpenQA.Selenium.IE.InternetExplorerOptions">
             <summary>
             Class to manage options specific to <see cref="T:OpenQA.Selenium.IE.InternetExplorerDriver" /></summary>
@@ -3121,12 +3379,6 @@
             Defaults to <see cref="F:OpenQA.Selenium.IE.InternetExplorerUnexpectedAlertBehavior.Default" />.
             </summary>
         </member>
-        <member name="P:OpenQA.Selenium.IE.InternetExplorerOptions.PageLoadStrategy">
-            <summary>
-            Gets or sets the value for describing how the browser is to wait for pages to load in the IE driver.
-            Defaults to <see cref="F:OpenQA.Selenium.IE.InternetExplorerPageLoadStrategy.Default" />.
-            </summary>
-        </member>
         <member name="P:OpenQA.Selenium.IE.InternetExplorerOptions.EnablePersistentHover">
             <summary>
             Gets or sets a value indicating whether to enable persistently sending WM_MOUSEMOVE messages
@@ -3157,12 +3409,6 @@
             when attaching to Internet Explorer. The default value is <see langword="false" />.
             </summary>
         </member>
-        <member name="P:OpenQA.Selenium.IE.InternetExplorerOptions.ValidateCookieDocumentType">
-            <summary>
-            Gets or sets a value indicating whether to validate the document type of the loaded
-            document when setting cookies.
-            </summary>
-        </member>
         <member name="P:OpenQA.Selenium.IE.InternetExplorerOptions.BrowserCommandLineArguments">
             <summary>
             Gets or sets the command line arguments used in launching Internet Explorer when the
@@ -3170,19 +3416,11 @@
             <see cref="P:OpenQA.Selenium.IE.InternetExplorerOptions.ForceCreateProcessApi" /> is <see langword="true" />.
             </summary>
         </member>
-        <member name="P:OpenQA.Selenium.IE.InternetExplorerOptions.Proxy">
-            <summary>
-            Gets or sets the <see cref="P:OpenQA.Selenium.IE.InternetExplorerOptions.Proxy" /> to be used with Internet Explorer. By default,
-            will install the specified proxy to be the system proxy, used by all instances of
-            Internet Explorer. To change this default behavior, change the <see cref="P:OpenQA.Selenium.IE.InternetExplorerOptions.UsePerProcessProxy" />
-            property.
-            </summary>
-        </member>
         <member name="P:OpenQA.Selenium.IE.InternetExplorerOptions.UsePerProcessProxy">
             <summary>
-            Gets or sets a value indicating whether to use the supplied <see cref="P:OpenQA.Selenium.IE.InternetExplorerOptions.Proxy" />
+            Gets or sets a value indicating whether to use the supplied <see cref="T:OpenQA.Selenium.Proxy" />
             settings on a per-process basis, not updating the system installed proxy setting.
-            This property is only valid when setting a <see cref="P:OpenQA.Selenium.IE.InternetExplorerOptions.Proxy" />, where the
+            This property is only valid when setting a <see cref="T:OpenQA.Selenium.Proxy" />, where the
             <see cref="P:OpenQA.Selenium.Proxy.Kind" /> property is either <see cref="F:OpenQA.Selenium.ProxyKind.Direct" />,
             <see cref="F:OpenQA.Selenium.ProxyKind.System" />, or <see cref="F:OpenQA.Selenium.ProxyKind.Manual" />, and is
             otherwise ignored. Defaults to <see langword="false" />.
@@ -3575,6 +3813,22 @@
             </summary>
             <returns>A <see cref="T:System.Collections.Generic.List`1" /> suitable for transmission across the wire.</returns>
         </member>
+        <member name="T:OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin">
+            <summary>
+            Provides values that indicate from where element offsets for MoveToElement
+            are calculated.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin.TopLeft">
+            <summary>
+            Offsets are calculated from the top-left corner of the element.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin.Center">
+            <summary>
+            Offsets are calcuated from the center of the element.
+            </summary>
+        </member>
         <member name="T:OpenQA.Selenium.Interactions.Actions">
             <summary>
             Provides a mechanism for building advanced interactions with the browser.
@@ -3593,7 +3847,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.KeyDown(OpenQA.Selenium.IWebElement,System.String)">
             <summary>
@@ -3603,7 +3859,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.KeyUp(System.String)">
             <summary>
@@ -3612,7 +3870,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.KeyUp(OpenQA.Selenium.IWebElement,System.String)">
             <summary>
@@ -3622,7 +3882,9 @@
             <param name="theKey">The key to be sent.</param>
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
             <exception cref="T:System.ArgumentException">If the key sent is not is not one
-            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, or <see cref="F:OpenQA.Selenium.Keys.Alt" />.</exception>
+            of <see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />.</exception>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.SendKeys(System.String)">
             <summary>
@@ -3699,6 +3961,15 @@
             <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.Actions.MoveToElement(OpenQA.Selenium.IWebElement,System.Int32,System.Int32)">
+            <summary>
+            Moves the mouse to the specified offset of the top-left corner of the specified element.
+            </summary>
+            <param name="toElement">The element to which to move the mouse.</param>
+            <param name="offsetX">The horizontal offset to which to move the mouse.</param>
+            <param name="offsetY">The vertical offset to which to move the mouse.</param>
+            <returns>A self-reference to this <see cref="T:OpenQA.Selenium.Interactions.Actions" />.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Interactions.Actions.MoveToElement(OpenQA.Selenium.IWebElement,System.Int32,System.Int32,OpenQA.Selenium.Interactions.MoveToElementOffsetOrigin)">
             <summary>
             Moves the mouse to the specified offset of the top-left corner of the specified element.
             </summary>
@@ -4209,7 +4480,9 @@
             <param name="keyboard">The <see cref="T:OpenQA.Selenium.IKeyboard" /> to use in performing the action.</param>
             <param name="mouse">The <see cref="T:OpenQA.Selenium.IMouse" /> to use in setting focus to the element on which to perform the action.</param>
             <param name="actionTarget">An <see cref="T:OpenQA.Selenium.ILocatable" /> object providing the element on which to perform the action.</param>
-            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />) to use in the action.</param>
+            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />) to use in the action.</param>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.KeyDownAction.Perform">
             <summary>
@@ -4269,7 +4542,9 @@
             <param name="keyboard">The <see cref="T:OpenQA.Selenium.IKeyboard" /> to use in performing the action.</param>
             <param name="mouse">The <see cref="T:OpenQA.Selenium.IMouse" /> to use in setting focus to the element on which to perform the action.</param>
             <param name="actionTarget">An <see cref="T:OpenQA.Selenium.ILocatable" /> object providing the element on which to perform the action.</param>
-            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />) to use in the action.</param>
+            <param name="key">The modifier key (<see cref="F:OpenQA.Selenium.Keys.Shift" />, <see cref="F:OpenQA.Selenium.Keys.Control" />, <see cref="F:OpenQA.Selenium.Keys.Alt" />,
+            <see cref="F:OpenQA.Selenium.Keys.Meta" />, <see cref="F:OpenQA.Selenium.Keys.Command" />,<see cref="F:OpenQA.Selenium.Keys.LeftAlt" />,
+            <see cref="F:OpenQA.Selenium.Keys.LeftControl" />,<see cref="F:OpenQA.Selenium.Keys.LeftShift" />) to use in the action.</param>
         </member>
         <member name="M:OpenQA.Selenium.Interactions.KeyUpAction.Perform">
             <summary>
@@ -5020,6 +5295,16 @@
             Encapsulates methods for finding and extracting WebDriver resources.
             </summary>
         </member>
+        <member name="P:OpenQA.Selenium.Internal.ResourceUtilities.AssemblyVersion">
+            <summary>
+            Gets a string representing the version of the Selenium assembly.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Internal.ResourceUtilities.PlatformFamily">
+            <summary>
+            Gets a string representing the platform family on which the Selenium assembly is executing.
+            </summary>
+        </member>
         <member name="M:OpenQA.Selenium.Internal.ResourceUtilities.GetResourceStream(System.String,System.String)">
             <summary>
             Gets a <see cref="T:System.IO.Stream" /> that contains the resource to use.
@@ -5399,41 +5684,6 @@
             should wait for a page to load when setting the <see cref="P:OpenQA.Selenium.IWebDriver.Url" />
             property.
             </summary>
-        </member>
-        <member name="M:OpenQA.Selenium.ITimeouts.ImplicitlyWait(System.TimeSpan)">
-            <summary>
-            Specifies the amount of time the driver should wait when searching for an
-            element if it is not immediately present.
-            </summary>
-            <param name="timeToWait">A <see cref="T:System.TimeSpan" /> structure defining the amount of time to wait.</param>
-            <returns>A self reference</returns>
-            <remarks>
-            When searching for a single element, the driver should poll the page
-            until the element has been found, or this timeout expires before throwing
-            a <see cref="T:OpenQA.Selenium.NoSuchElementException" />. When searching for multiple elements,
-            the driver should poll the page until at least one element has been found
-            or this timeout has expired.
-            <para>
-            Increasing the implicit wait timeout should be used judiciously as it
-            will have an adverse effect on test run time, especially when used with
-            slower location strategies like XPath.
-            </para></remarks>
-        </member>
-        <member name="M:OpenQA.Selenium.ITimeouts.SetScriptTimeout(System.TimeSpan)">
-            <summary>
-            Specifies the amount of time the driver should wait when executing JavaScript asynchronously.
-            </summary>
-            <param name="timeToWait">A <see cref="T:System.TimeSpan" /> structure defining the amount of time to wait.
-            Setting this parameter to <see cref="F:System.TimeSpan.MinValue" /> will allow the script to run indefinitely.</param>
-            <returns>A self reference</returns>
-        </member>
-        <member name="M:OpenQA.Selenium.ITimeouts.SetPageLoadTimeout(System.TimeSpan)">
-            <summary>
-            Specifies the amount of time the driver should wait for a page to load when setting the <see cref="P:OpenQA.Selenium.IWebDriver.Url" /> property.
-            </summary>
-            <param name="timeToWait">A <see cref="T:System.TimeSpan" /> structure defining the amount of time to wait.
-            Setting this parameter to <see cref="F:System.TimeSpan.MinValue" /> will allow the page to load indefinitely.</param>
-            <returns>A self reference</returns>
         </member>
         <member name="T:OpenQA.Selenium.ITouchScreen">
             <summary>
@@ -6618,11 +6868,6 @@
             OperaDriver instance is exited. Defaults to <see langword="false" />.
             </summary>
         </member>
-        <member name="P:OpenQA.Selenium.Opera.OperaOptions.Proxy">
-            <summary>
-            Gets or sets the proxy to use with this instance of Opera.
-            </summary>
-        </member>
         <member name="P:OpenQA.Selenium.Opera.OperaOptions.Arguments">
             <summary>
             Gets the list of arguments appended to the Opera command line as a string array.
@@ -7496,6 +7741,14 @@
             <returns>A dictionary suitable for serializing to the W3C Specification
             dialect of the wire protocol.</returns>
         </member>
+        <member name="M:OpenQA.Selenium.Proxy.ToLegacyCapability">
+            <summary>
+            Returns a dictionary suitable for serializing to the OSS dialect of the
+            wire protocol.
+            </summary>
+            <returns>A dictionary suitable for serializing to the OSS dialect of the
+            wire protocol.</returns>
+        </member>
         <member name="T:OpenQA.Selenium.Remote.CapabilityType">
             <summary>
             Provides types of capabilities for the DesiredCapabilities object.
@@ -7504,6 +7757,16 @@
         <member name="F:OpenQA.Selenium.Remote.CapabilityType.BrowserName">
             <summary>
             Capability name used for the browser name.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CapabilityType.BrowserVersion">
+            <summary>
+            Capability name used for the browser version.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CapabilityType.PlatformName">
+            <summary>
+            Capability name used for the platform name.
             </summary>
         </member>
         <member name="F:OpenQA.Selenium.Remote.CapabilityType.Platform">
@@ -7566,6 +7829,11 @@
             Capability name used to indicate how the browser handles unexpected alerts.
             </summary>
         </member>
+        <member name="F:OpenQA.Selenium.Remote.CapabilityType.UnhandledPromptBehavior">
+            <summary>
+            Capability name used to indicate how the browser handles unhandled user prompts.
+            </summary>
+        </member>
         <member name="F:OpenQA.Selenium.Remote.CapabilityType.PageLoadStrategy">
             <summary>
             Capability name used to indicate the page load strategy for the browser.
@@ -7599,6 +7867,16 @@
         <member name="F:OpenQA.Selenium.Remote.CapabilityType.SupportsWebStorage">
             <summary>
             Capability name used to indicate whether the driver supports web storage.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CapabilityType.SetWindowRect">
+            <summary>
+            Capability name used to indicate whether the driver supports setting the browser window's size and position.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CapabilityType.Timeouts">
+            <summary>
+            Capability name used to get or set timeout values when creating a session.
             </summary>
         </member>
         <member name="T:OpenQA.Selenium.Remote.Command">
@@ -7804,11 +8082,6 @@
         <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.AcceptInsecureCerts">
             <summary>
             Gets or sets a value indicating whether the browser accepts SSL certificates.
-            </summary>
-        </member>
-        <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.OpenQA#Selenium#Remote#ISpecificationCompliant#IsSpecificationCompliant">
-            <summary>
-            Gets or sets a value indicating whether this set of capabilities is compliant with the W3C WebDriver specification.
             </summary>
         </member>
         <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.CapabilitiesDictionary">
@@ -8514,6 +8787,20 @@
             <param name="commandToExecute">The command you wish to execute</param>
             <returns>A response from the browser</returns>
         </member>
+        <member name="M:OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Dispose">
+            <summary>
+            Releases all resources used by the <see cref="T:OpenQA.Selenium.Remote.DriverServiceCommandExecutor" />.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:OpenQA.Selenium.Remote.HttpCommandExecutor" /> and
+            optionally releases the managed resources.
+            </summary>
+            <param name="disposing">
+                <see langword="true" /> to release managed and resources;
+            <see langword="false" /> to only release unmanaged resources.</param>
+        </member>
         <member name="T:OpenQA.Selenium.Remote.ErrorResponse">
             <summary>
             Provides a way to store errors from a response
@@ -8585,6 +8872,26 @@
             <param name="commandToExecute">The command you wish to execute</param>
             <returns>A response from the browser</returns>
         </member>
+        <member name="M:OpenQA.Selenium.Remote.HttpCommandExecutor.OnBeforeRemoteHttpRequest(OpenQA.Selenium.Remote.BeforeRemoteHttpRequestEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Remote.HttpCommandExecutor.BeforeRemoteHttpRequest" /> event.
+            </summary>
+            <param name="eventArgs">A <see cref="T:OpenQA.Selenium.Remote.BeforeRemoteHttpRequestEventArgs" /> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.HttpCommandExecutor.Dispose">
+            <summary>
+            Releases all resources used by the <see cref="T:OpenQA.Selenium.Remote.HttpCommandExecutor" />.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.HttpCommandExecutor.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:OpenQA.Selenium.Remote.HttpCommandExecutor" /> and
+            optionally releases the managed resources.
+            </summary>
+            <param name="disposing">
+                <see langword="true" /> to release managed and resources;
+            <see langword="false" /> to only release unmanaged resources.</param>
+        </member>
         <member name="T:OpenQA.Selenium.Remote.ICommandExecutor">
             <summary>
             Provides a way to send commands to the remote server
@@ -8620,16 +8927,6 @@
         <member name="P:OpenQA.Selenium.Remote.IHasSessionId.SessionId">
             <summary>
             Gets the session ID of the current session.
-            </summary>
-        </member>
-        <member name="T:OpenQA.Selenium.Remote.ISpecificationCompliant">
-            <summary>
-            Interface used to determine whether an implementing object is compliant with the W3C WebDriver specification.
-            </summary>
-        </member>
-        <member name="P:OpenQA.Selenium.Remote.ISpecificationCompliant.IsSpecificationCompliant">
-            <summary>
-            Gets or sets a value indicating whether this set of capabilities is compliant with the W3C WebDriver specification.
             </summary>
         </member>
         <member name="T:OpenQA.Selenium.Remote.CharArrayJsonConverter">
@@ -9246,41 +9543,6 @@
             should wait for a page to load when setting the <see cref="P:OpenQA.Selenium.IWebDriver.Url" />
             property.
             </summary>
-        </member>
-        <member name="M:OpenQA.Selenium.Remote.RemoteTimeouts.ImplicitlyWait(System.TimeSpan)">
-            <summary>
-            Specifies the amount of time the driver should wait when searching for an
-            element if it is not immediately present.
-            </summary>
-            <param name="timeToWait">A <see cref="T:System.TimeSpan" /> structure defining the amount of time to wait.</param>
-            <returns>A self reference</returns>
-            <remarks>
-            When searching for a single element, the driver should poll the page
-            until the element has been found, or this timeout expires before throwing
-            a <see cref="T:OpenQA.Selenium.NoSuchElementException" />. When searching for multiple elements,
-            the driver should poll the page until at least one element has been found
-            or this timeout has expired.
-            <para>
-            Increasing the implicit wait timeout should be used judiciously as it
-            will have an adverse effect on test run time, especially when used with
-            slower location strategies like XPath.
-            </para></remarks>
-        </member>
-        <member name="M:OpenQA.Selenium.Remote.RemoteTimeouts.SetScriptTimeout(System.TimeSpan)">
-            <summary>
-            Specifies the amount of time the driver should wait when executing JavaScript asynchronously.
-            </summary>
-            <param name="timeToWait">A <see cref="T:System.TimeSpan" /> structure defining the amount of time to wait.
-            Setting this parameter to <see cref="F:System.TimeSpan.MinValue" /> will allow the script to run indefinitely.</param>
-            <returns>A self reference</returns>
-        </member>
-        <member name="M:OpenQA.Selenium.Remote.RemoteTimeouts.SetPageLoadTimeout(System.TimeSpan)">
-            <summary>
-            Specifies the amount of time the driver should wait for a page to load when setting the <see cref="P:OpenQA.Selenium.IWebDriver.Url" /> property.
-            </summary>
-            <param name="timeToWait">A <see cref="T:System.TimeSpan" /> structure defining the amount of time to wait.
-            Setting this parameter to <see cref="F:System.TimeSpan.MinValue" /> will allow the page to load indefinitely.</param>
-            <returns>A self reference</returns>
         </member>
         <member name="T:OpenQA.Selenium.Remote.RemoteTouchScreen">
             <summary>
@@ -11625,9 +11887,34 @@
             The selector used (CSS/XPath) was invalid.
             </summary>
         </member>
+        <member name="F:OpenQA.Selenium.WebDriverResult.SessionNotCreated">
+            <summary>
+            A session was not created by the driver
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.WebDriverResult.MoveTargetOutOfBounds">
+            <summary>
+            The requested move was outside the active view port
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.WebDriverResult.InvalidXPathSelector">
+            <summary>
+            The XPath selector was invalid.
+            </summary>
+        </member>
         <member name="F:OpenQA.Selenium.WebDriverResult.InsecureCertificate">
             <summary>
             An insecure SSl certificate was specified.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.WebDriverResult.ElementNotInteractable">
+            <summary>
+            The element was not interactable
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.WebDriverResult.InvalidArgument">
+            <summary>
+            An invalid argument was passed to the command.
             </summary>
         </member>
         <member name="F:OpenQA.Selenium.WebDriverResult.NoSuchCookie">
@@ -11635,9 +11922,14 @@
             No cookie was found matching the name requested.
             </summary>
         </member>
-        <member name="F:OpenQA.Selenium.WebDriverResult.InvalidArgument">
+        <member name="F:OpenQA.Selenium.WebDriverResult.UnableToCaptureScreen">
             <summary>
-            An invalid argument was passed to the command.
+            The driver was unable to capture the screen.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.WebDriverResult.ElementClickIntercepted">
+            <summary>
+            The click on the element was intercepted by a different element.
             </summary>
         </member>
         <member name="T:OpenQA.Selenium.WebDriverTimeoutException">

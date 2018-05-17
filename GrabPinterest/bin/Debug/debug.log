@@ -1,1 +1,24 @@
 [0321/130222.732:ERROR:exception_handler_server.cc(524)] ConnectNamedPipe: The pipe is being closed. (0xE8)
+[0411/231742.411:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0411/231742.413:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0411/231742.413:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0411/231742.413:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0411/231742.413:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0411/231742.413:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0411/231742.414:ERROR:exception_snapshot_win.cc(88)] thread ID 9240 not found in process
+[0411/231742.414:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[0502/074411.143:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0503/074411.150:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0503/205404.850:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0503/205404.897:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0504/074411.139:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0504/205404.859:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0504/205404.906:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0505/183915.628:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0506/074907.228:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0506/074907.274:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0508/120734.142:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0511/234317.607:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0512/234317.668:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0513/234317.673:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0514/234317.728:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports

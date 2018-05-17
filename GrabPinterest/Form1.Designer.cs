@@ -35,8 +35,9 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.killToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mynotifyicon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.setUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +60,8 @@
             this.loadToolStripMenuItem,
             this.startToolStripMenuItem,
             this.killToolStripMenuItem,
-            this.setUserToolStripMenuItem});
+            this.loginToolStripMenuItem,
+            this.showToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(375, 24);
@@ -87,6 +89,13 @@
             this.killToolStripMenuItem.Text = "Kill";
             this.killToolStripMenuItem.Click += new System.EventHandler(this.killToolStripMenuItem_Click_1);
             // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
+            // 
             // mynotifyicon
             // 
             this.mynotifyicon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
@@ -96,12 +105,12 @@
             this.mynotifyicon.Visible = true;
             this.mynotifyicon.Click += new System.EventHandler(this.mynotifyicon_Click);
             // 
-            // setUserToolStripMenuItem
+            // showToolStripMenuItem
             // 
-            this.setUserToolStripMenuItem.Name = "setUserToolStripMenuItem";
-            this.setUserToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.setUserToolStripMenuItem.Text = "SetUser";
-            this.setUserToolStripMenuItem.Click += new System.EventHandler(this.setUserToolStripMenuItem_Click);
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.showToolStripMenuItem.Text = "Show";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // Pinterest
             // 
@@ -131,7 +140,8 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon mynotifyicon;
         private System.Windows.Forms.ToolStripMenuItem killToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
     }
 }
 
