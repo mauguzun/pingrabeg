@@ -24,9 +24,11 @@ namespace GrabPinterest
         private bool grabStarter = false;
 
         private List<Domain> _domains;
+        Dictionary<string,bool> result = new Dictionary<string,bool>();
 
 
-        private string _url = "https://www.pinterest.com/categories/popular/";
+        private string[] _url = { "https://www.pinterest.com/categories/popular/", "https://www.pinterest.com/categories/other/", "https://www.pinterest.com/" };
+        private int _currenturl = 0;
         private string _login = "http://pinterest.com/login";
 
         private string _domainFile = "domains.txt";
@@ -39,48 +41,62 @@ namespace GrabPinterest
 
             _domains = new List<Domain>();
 
-            //ChromeOptions options = new ChromeOptions();
-            //options.AddArgument("--headless");
-            //options.AddArgument("--no-startup-window");
-
-            //var chromeDriverService = ChromeDriverService.CreateDefaultService();
-            //chromeDriverService.HideCommandPromptWindow = true;
-
-            //driver = new PhantomJSDriver(chromeDriverService, options);
-
-            // var PhantomJSDriver = PhantomJSDriver.CreateDefaultService();
-            // chromeDriverService.HideCommandPromptWindow = true;
 
             PhantomJSDriverService sr = PhantomJSDriverService.CreateDefaultService();
             sr.HideCommandPromptWindow = true;
+
             driver = new PhantomJSDriver(sr);
-          
+
+
+
+            /// 
+           // ChromeOptions op = new ChromeOptions();
+            
+           // driver = new ChromeDriver();
+
             InitializeComponent();
             _LoadDomain();
 
 
-          _resultFile =  $"{new Random().Next(0 ,34)}_result.txt";
+            //_resultFile =  $"{new Random().Next(0 ,34)}_result.txt";
+            if (driver is PhantomJSDriver)
+            {
+                console.Text = $"size is 2000x1000" + Environment.NewLine;
+                driver.Manage().Window.Size = new Size(2000, 1000);
+            }
 
 
-       
+
         }
 
-        private bool MakeLogin(string email,string password)
+        private bool MakeLogin(string email, string password)
         {
             try
             {
                 driver.Url = _login;
-                driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0,0, 30);
+                driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 0, 30);
                 driver.FindElementByName("id").SendKeys(email);
                 driver.FindElementByName("password").SendKeys(password);
                 driver.FindElementByCssSelector("form button").Click();
-                return true;
+                Thread.Sleep(5000);
+
+               
+
+                return (driver.FindElementByName("id") == null) ? true : false;
             }
             catch
             {
                 return false;
             }
-          
+            finally
+            {
+                driver.GetScreenshot().SaveAsFile("login.png", ScreenshotImageFormat.Png);
+                Process photoViewer = new Process();
+                photoViewer.StartInfo.FileName = "login.png";
+                photoViewer.StartInfo.Arguments = "login.png";
+                photoViewer.Start();
+            }
+
         }
 
         private void _LoadDomain()
@@ -112,7 +128,7 @@ namespace GrabPinterest
                     select dom.Url;
 
 
-            
+
             File.WriteAllLines(this._domainFile, x.ToList());
         }
 
@@ -133,10 +149,7 @@ namespace GrabPinterest
 
             Task.Factory.StartNew(() =>
             {
-
-
-               
-                driver.Url = this._url;
+                SetDriverUrl();
                 try
                 {
                     WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
@@ -147,7 +160,7 @@ namespace GrabPinterest
                         AppendTextBox("<-- " + Environment.NewLine);
                         this.AppendFiles();
                         AppendTextBox("-->" + Environment.NewLine);
-                        Thread.Sleep(4000);
+                        Thread.Sleep(5000);
                     }
 
 
@@ -161,17 +174,29 @@ namespace GrabPinterest
 
             });
 
-            Task.Factory.StartNew(() =>
+            //Task.Factory.StartNew(() =>
+            //{
+
+            //    while (true)
+            //    {
+            //        this.PostResult();
+            //    }
+
+            //});
+
+
+        }
+
+        private void SetDriverUrl()
+        {
+            if (_currenturl > _url.Count())
             {
+                _currenturl = 0;
+            }
+            else
+                _currenturl++;
 
-                while (true)
-                {
-                    this.PostResult();
-                }
-
-            });
-
-
+            driver.Url = this._url[_currenturl];
         }
 
         private void AppendFiles()
@@ -179,30 +204,41 @@ namespace GrabPinterest
 
             try
             {
-                List<string> result = new List<string>();
+               
                 var nodes = driver.FindElementsByCssSelector("img");
+                driver.GetScreenshot().SaveAsFile("screen.png", ScreenshotImageFormat.Png);
+
                 foreach (var node in nodes)
                 {
-            
-                   
-                    string img = node.GetAttribute("src");
-                    if (img.Contains("images/user"))
-                        continue;
+                    try
+                    {
+                        string img = node.GetAttribute("src");
+                        if (!img.Contains("236x"))
+                            continue;
 
-                   
-                    img = img.Replace("236x", "564x");
-                    string text = node.GetAttribute("alt");
-                    string request = $"?c={this.Base64Encode(text)}*{this.Base64Encode(img.Replace("https://", ""))}";
+                        img = img.Replace("236x", "564x");
+                        string text = node.GetAttribute("alt");
+                        string request = $"?c={this.Base64Encode(text)}*{this.Base64Encode(img.Replace("https://", ""))}";
 
-                    if (!result.Contains(request))
-                        result.Add(request);
-                    else
-                        AppendTextBox($" node  already exist" + Environment.NewLine);
+                        if (!result.Keys.Contains(request))
+                            result.Add(request, false);
+                    }
+                    catch
+                    {
 
-
+                    }
+                
+                      
                 }
-                File.AppendAllLines(this._resultFile, result);
-                AppendTextBox($"saved {result.Count()}" + Environment.NewLine);
+
+
+                List<string> pinn = result.Where(p => p.Value == false).Select(p => p.Key).ToList();
+                AppendTextBox($"saved {pinn.Count()}" + Environment.NewLine);
+                result = result.ToDictionary(p => p.Key, p => true);
+                Parallel.ForEach<string>(pinn, MakeEeasyPost);
+                
+               
+                
             }
             catch (Exception ex)
             {
@@ -210,10 +246,57 @@ namespace GrabPinterest
             }
             finally
             {
-                driver.Url = this._url;
-
+                SetDriverUrl();
             }
         }
+
+
+        //
+        private void MakeEeasyPost(string line)
+        {
+
+            Random rand = new Random();
+            var random = this._domains[rand.Next(0, _domains.Count)];
+
+            try
+            {
+
+               
+
+                var url = (random.Url.Contains("put/index/")) ? random.Url + line :
+                    random.Url + "put/index/" + line;
+
+
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    var x = reader.ReadToEnd();
+                    if (x.Contains("1"))
+                        AppendTextBox("+");
+                    else
+                        AppendTextBox("0");
+                }
+
+               
+
+
+            }
+            catch(Exception ex)
+            {
+                var x = ex.Message + random;
+                AppendTextBox("some error");
+
+            }
+            
+
+        }
+
+        //
 
         private void PostResult()
         {
@@ -242,7 +325,7 @@ namespace GrabPinterest
                     using (Stream stream = response.GetResponseStream())
                     using (StreamReader reader = new StreamReader(stream))
                     {
-                        var x =  reader.ReadToEnd();
+                        var x = reader.ReadToEnd();
                         if (x.Contains("1"))
                             newP++;
                         else
@@ -346,7 +429,7 @@ namespace GrabPinterest
         {
             string[] login = console.Text.Split(':');
 
-            console.Text = $"logined : {MakeLogin(login[0],login[1])}";
+            console.Text = $"logined : {MakeLogin(login[0], login[1])}";
         }
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
@@ -355,7 +438,7 @@ namespace GrabPinterest
             {
                 console.Text += $"{item.Url}{Environment.NewLine}";
             }
-           
+
 
         }
     }
