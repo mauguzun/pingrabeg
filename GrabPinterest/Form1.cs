@@ -27,7 +27,7 @@ namespace GrabPinterest
         Dictionary<string,bool> result = new Dictionary<string,bool>();
 
 
-        private string[] _url = { "https://www.pinterest.com/categories/popular/", "https://www.pinterest.com/categories/other/", "https://www.pinterest.com/" };
+        private string[] _url = { "https://www.pinterest.com/categories/popular/", "https://www.pinterest.com/categories/other/" };
         private int _currenturl = 0;
         private string _login = "http://pinterest.com/login";
 
@@ -189,13 +189,13 @@ namespace GrabPinterest
 
         private void SetDriverUrl()
         {
-            if (_currenturl > _url.Count())
-            {
-                _currenturl = 0;
-            }
-            else
-                _currenturl++;
+           
+             _currenturl++;
 
+            if (_url.Count() <= _currenturl)
+                _currenturl = 0;
+
+            console.Text = this._url[_currenturl];
             driver.Url = this._url[_currenturl];
         }
 

@@ -45,3 +45,4 @@ C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\obj\Debug\GrabPinterest.csproj.CopyComplete
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\bin\Debug\phantomjs.exe
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\bin\Debug\phantomjs-license.txt
+C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\obj\Debug\GrabPinterest.csprojAssemblyReference.cache
