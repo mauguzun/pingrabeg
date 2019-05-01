@@ -42,3 +42,31 @@ C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\bin\Debug\WebDriver.Support.dll
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\bin\Debug\WebDriver.Support.xml
 C:\Users\maugu\Documents\Visual Studio 2015\Projects\GrabPinterest\GrabPinterest\obj\Debug\GrabPinterest.csprojResolveAssemblyReference.cache
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\GrabPinterest.exe.config
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\GrabPinterest.exe
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\GrabPinterest.pdb
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\HtmlAgilityPack.dll
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\Newtonsoft.Json.dll
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\System.Net.Http.Formatting.dll
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\WebDriver.dll
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\WebDriver.Support.dll
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\HtmlAgilityPack.pdb
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\HtmlAgilityPack.xml
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\Newtonsoft.Json.xml
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\System.Net.Http.Formatting.xml
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\WebDriver.xml
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\WebDriver.Support.xml
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.csprojAssemblyReference.cache
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.Pinterest.resources
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.Properties.Resources.resources
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.csproj.GenerateResource.cache
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.csproj.CoreCompileInputs.cache
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.csproj.CopyComplete
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.exe
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.pdb
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\System.Net.Http.Extensions.dll
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\System.Net.Http.Primitives.dll
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\Newtonsoft.Json.pdb
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\System.Net.Http.Extensions.xml
+C:\my_work_files\pingrabeg\GrabPinterest\bin\Debug\System.Net.Http.Primitives.xml
+C:\my_work_files\pingrabeg\GrabPinterest\obj\Debug\GrabPinterest.csproj.App.config
